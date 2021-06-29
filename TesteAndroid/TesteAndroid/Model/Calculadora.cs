@@ -10,5 +10,6 @@ namespace TesteAndroid.Model
         public Double SegundoValor { get; set; }
         public String Operacao { get; set; }
         public Double Resultado { get; set; }
+        public IList<string> Operacoes { get; set; }
     }
 }

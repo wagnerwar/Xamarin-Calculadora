@@ -9,19 +9,21 @@ namespace TesteAndroid.ViewModel
 {
     public class CalculadoraViewModel : BaseViewModel
     {
-        public ICommand MaisCommand { get; private set; }
+        public ICommand CalcularCommand { get; private set; }
         public Calculadora calculadora { get; set; }
         public CalculadoraViewModel()
         {
-            MaisCommand = new Command<string>(Mais);        
+            CalcularCommand = new Command<string>(Calcular);
+            this.calculadora = new Calculadora();
+            this.CarregarOperacoesDisponiveis();
         }
 
         public Double PrimeiroValor { 
             get {
                 return calculadora.PrimeiroValor;
-            } set {
-                OnPropertyChanged();
+            } set {                
                 calculadora.PrimeiroValor = value;
+                OnPropertyChanged();
             }
         }
 
@@ -32,9 +34,9 @@ namespace TesteAndroid.ViewModel
                 return calculadora.SegundoValor;
             }
             set
-            {
-                OnPropertyChanged();
+            {                
                 calculadora.SegundoValor = value;
+                OnPropertyChanged();
             }
         }
 
@@ -45,9 +47,9 @@ namespace TesteAndroid.ViewModel
                 return calculadora.Operacao;
             }
             set
-            {
-                OnPropertyChanged();
+            {                
                 calculadora.Operacao = value;
+                OnPropertyChanged();
             }
         }
 
@@ -58,15 +60,45 @@ namespace TesteAndroid.ViewModel
                 return calculadora.Resultado;
             }
             set
-            {
-                OnPropertyChanged();
+            {                
                 calculadora.Resultado = value;
+                OnPropertyChanged();
             }
         }
-
-        void Mais(string obj)
+        public IList<string> OperacoesDisponiveis
         {
-            calculadora.Resultado = calculadora.PrimeiroValor + calculadora.SegundoValor;
+            get
+            {
+                return calculadora.Operacoes;
+            }
+        }
+        private void CarregarOperacoesDisponiveis()
+        {
+            this.calculadora.Operacoes = new List<string>();
+            this.calculadora.Operacoes.Add("+");
+            this.calculadora.Operacoes.Add("-");
+            this.calculadora.Operacoes.Add("*");
+            this.calculadora.Operacoes.Add("/");
+        }
+        void Calcular(string obj)
+        {
+            switch (this.Operacao)
+            {
+                case "+":
+                    this.Resultado = this.PrimeiroValor + this.SegundoValor;
+                    break;
+                case "-":
+                    this.Resultado = this.PrimeiroValor - this.SegundoValor;
+                    break;
+                case "*":
+                    this.Resultado = this.PrimeiroValor * this.SegundoValor;
+                    break;
+                case "/":
+                    this.Resultado = this.PrimeiroValor / this.SegundoValor;
+                    break;
+                default:
+                    break;
+            }            
             MessagingCenter.Send<MainPage>(new MainPage(), "AlterarResultado");
         }
     }

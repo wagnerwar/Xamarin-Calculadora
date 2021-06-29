@@ -11,16 +11,21 @@
         <TableView Intent="Form">
             <TableRoot>
                 <TableSection Title="Valores">
-                    <EntryCell IsEnabled="True" x:Name="PrimeiroValor" Label="Primeiro Valor" Keyboard="Numeric" HorizontalTextAlignment="Start"></EntryCell>
-                    <EntryCell IsEnabled="True" x:Name="SegundoValor" Label="Segundo Valor" Keyboard="Numeric" HorizontalTextAlignment="Start"></EntryCell>
-                </TableSection>
-                <TableSection Title="Operações">
+                    <EntryCell IsEnabled="True" x:Name="PrimeiroValor" Label="Primeiro Valor" Keyboard="Numeric" HorizontalTextAlignment="Start" Text="{Binding PrimeiroValor}"></EntryCell>
+                    <EntryCell IsEnabled="True" x:Name="SegundoValor" Label="Segundo Valor" Keyboard="Numeric" HorizontalTextAlignment="Start" Text="{Binding SegundoValor}"></EntryCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                            <Picker x:Name="operacao"
+                                Title="Selecione uma operação"
+                                TitleColor="Red" 
+                                ItemsSource="{Binding OperacoesDisponiveis}" 
+                                SelectedItem="{Binding Operacao}">
+                            </Picker>
+                        </StackLayout>
+                    </ViewCell>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" >
-                            <Button Text="+"  Command="{Binding MaisCommand}" HorizontalOptions="StartAndExpand" CornerRadius="10" ></Button>
-                            <Button Text="-" Clicked="Menos_Clicked" HorizontalOptions="StartAndExpand" CornerRadius="10" ></Button>
-                            <Button Text="*" Clicked="Multiplicacao_Clicked" HorizontalOptions="StartAndExpand" CornerRadius="10" ></Button>
-                            <Button Text="/" Clicked="Divisao_Clicked" HorizontalOptions="StartAndExpand" CornerRadius="10" ></Button>
+                            <Button Text="Calcular"  Command="{Binding CalcularCommand}" HorizontalOptions="StartAndExpand" CornerRadius="10" ></Button>
                         </StackLayout>
                     </ViewCell>
                 </TableSection>
