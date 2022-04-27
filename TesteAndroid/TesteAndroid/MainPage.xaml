@@ -11,33 +11,20 @@
         <TableView Intent="Form">
             <TableRoot>
                 <TableSection Title="Valores">
-                    <EntryCell IsEnabled="True" x:Name="PrimeiroValor" Label="Primeiro Valor" Keyboard="Numeric" HorizontalTextAlignment="Start" Text="{Binding PrimeiroValor}"></EntryCell>
-                    <EntryCell IsEnabled="True" x:Name="SegundoValor" Label="Segundo Valor" Keyboard="Numeric" HorizontalTextAlignment="Start" Text="{Binding SegundoValor}"></EntryCell>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                            <Picker x:Name="operacao"
-                                Title="Selecione uma operação"
-                                TitleColor="Red" 
-                                ItemsSource="{Binding OperacoesDisponiveis}" 
-                                SelectedItem="{Binding Operacao}">
-                            </Picker>
-                        </StackLayout>
-                    </ViewCell>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" >
-                            <Button Text="Calcular"  Command="{Binding CalcularCommand}" HorizontalOptions="StartAndExpand" CornerRadius="10" ></Button>
-                        </StackLayout>
-                    </ViewCell>
-                </TableSection>
-                <TableSection Title="Resultado">
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label x:Name="Resultado" FontSize="Large" Text="{Binding Resultado}" ></Label>
-                        </StackLayout>
-                    </ViewCell>
+                    <EntryCell IsEnabled="True" x:Name="PrimeiroValor"  Keyboard="Numeric" HorizontalTextAlignment="Start" Text="{Binding PrimeiroValor}"></EntryCell>
+                    <EntryCell IsEnabled="True" x:Name="SegundoValor"  Keyboard="Numeric" HorizontalTextAlignment="Start" Text="{Binding SegundoValor}"></EntryCell>
                 </TableSection>
             </TableRoot>
         </TableView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+            <Button Text="+" CommandParameter="+"  Command="{Binding DefinirOperacaoCommand}" HorizontalOptions="StartAndExpand" CornerRadius="10" ></Button>
+            <Button Text="-" CommandParameter="-"  Command="{Binding DefinirOperacaoCommand}" HorizontalOptions="StartAndExpand" CornerRadius="10" ></Button>
+            <Button Text="/" CommandParameter="/"  Command="{Binding DefinirOperacaoCommand}" HorizontalOptions="StartAndExpand" CornerRadius="10" ></Button>
+            <Button Text="*" CommandParameter="*"  Command="{Binding DefinirOperacaoCommand}" HorizontalOptions="StartAndExpand" CornerRadius="10" ></Button>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label x:Name="Resultado" FontSize="Large" Text="{Binding Resultado}" ></Label>
+        </StackLayout>
     </StackLayout>
     
 </ContentPage>

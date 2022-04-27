@@ -9,11 +9,13 @@ namespace TesteAndroid.ViewModel
 {
     public class CalculadoraViewModel : BaseViewModel
     {
+        public ICommand DefinirOperacaoCommand { get; private set; }
         public ICommand CalcularCommand { get; private set; }
         public Calculadora calculadora { get; set; }
         public CalculadoraViewModel()
         {
-            CalcularCommand = new Command<string>(Calcular);
+            DefinirOperacaoCommand = new Command<string>(DefinirOperacao);
+            CalcularCommand = new Command(Calcular);
             this.calculadora = new Calculadora();
             this.CarregarOperacoesDisponiveis();
         }
@@ -80,7 +82,7 @@ namespace TesteAndroid.ViewModel
             this.calculadora.Operacoes.Add("*");
             this.calculadora.Operacoes.Add("/");
         }
-        void Calcular(string obj)
+        void Calcular()
         {
             switch (this.Operacao)
             {
@@ -98,8 +100,14 @@ namespace TesteAndroid.ViewModel
                     break;
                 default:
                     break;
-            }            
-            MessagingCenter.Send<MainPage>(new MainPage(), "AlterarResultado");
+            }
+            OnPropertyChanged();
+        }
+        void DefinirOperacao(string obj)
+        {
+            this.Operacao = obj;
+            OnPropertyChanged();
+            Calcular();
         }
     }
 }

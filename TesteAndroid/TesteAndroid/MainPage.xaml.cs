@@ -17,14 +17,7 @@ namespace TesteAndroid
         public MainPage()
         {
             InitializeComponent();
-
             this.BindingContext = new CalculadoraViewModel();
-
-            // Assinando mensagem
-            MessagingCenter.Subscribe<MainPage>(this, "AlterarResultado", (sender) =>
-            {
-                DisplayAlert("Cálculo feito", "Cálculo feito", "OK");
-            });
         }
     }
 }
